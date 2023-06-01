@@ -1,0 +1,32 @@
+.price {
+  font-size: 15px;
+  color: #afafaf;
+}
+.description {
+  font-size: 15px;
+  color: #6d6a6a;
+}
+tabset ::ng-deep .nav-item a {
+  padding: 15px 47px;
+  color: #1b1b1b;
+  &.active {
+    background-color: #e1603a !important;
+    color: #fafaf9 !important;
+  }
+}
+.user_img {
+  width: 70px;
+  border-radius: 4em;
+}
+.add_to_cart_btn {
+  background-color: #080808 !important;
+  padding: 14px 42px;
+  text-transform: uppercase;
+  color: #fafaf9 !important;
+  font-family: primaryFont;
+  border-radius: 0px;
+}
+#video{
+  width: 100%;
+  height: 20rem
+}

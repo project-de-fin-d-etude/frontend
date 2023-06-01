@@ -1,0 +1,155 @@
+<div class="container">
+  <div class="d-flex justify-content-between align-items-center">
+    <div class=" f38 bold black">
+      <button class="btn p-0" [routerLink]="['/']">
+        <img src="../../../assets/images/svg/Icon-arrow.svg" alt="">
+      </button>
+      Products-Management
+    </div>
+    <button class="btn primary_btn br15 my-4 f14" type="button" (click)="add_product()">
+      Add Product
+    </button>
+  </div>
+  <div class="pt-5">
+    <div class="table-responsive" *ngIf="products?.length>0;else no_products">
+      <table class="table table-borderless">
+        <thead class="text-uppercase primaryFont f14 black_2">
+          <tr>
+            <th></th>
+            <th>PRODUIT</th>
+            <th>DESCRIPTION</th>
+            <th>PRIX</th>
+            <th>QUANTITE</th>
+            <th>CATEGORIE</th>
+            <th>OPTIONS</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td class="text-uppercase Medium f13 grey_2 letter_spacing">
+             <a [routerLink]="['/product-list/'+product.id]" > <img src="http://127.0.0.1:8000/uploads/products/{{product.image_name}}" alt="" class="img_item mr-2"></a>
+            </td>
+            <td class="Medium f15 black text_center">{{product.name}}</td>
+            <td class="Medium f15 black">{{product.description}} </td>
+            <td class="Medium f15 black text_center">{{product.price}} DZ</td>
+            <td class="Medium f15 black text_center">{{product.quantity}} </td>
+            <td class="Medium f15 black text_center">{{product?.category_payload.title}} </td>
+            <td class="Medium f15 black text_center">
+              <button class="btn p-0" (click)="showChildModal(product)">
+                <img src="../../../assets/images/svg/Settings.svg" alt="">
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div bsModal #childModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="dialog-child-name">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content px-1 py-2">
+      <div class="d-flex justify-content-end">
+        <button class="btn p-0" (click)="hideChildModal()">
+          <div class="close_btn">
+            <img src="../../../assets/images/svg/x_white.svg" alt="">
+          </div>
+        </button>
+      </div>
+      <div class="px-5">
+        <div class="d-flex justify-content-between py-4 align-items-center">
+          <span class="f24 bold black">Ajouter un produit</span>
+        <div>
+          <button class="btn primary_btn br15  f14 mr-2" (click)="manage_product()">Sauvegarder</button>
+          <button class="btn primary_btn_out br15  f14 " *ngIf="product" (click)="delete_product()">Supprimer</button>
+        </div>
+        </div>
+
+        <form [formGroup]="product_form">
+          <div class="row">
+            <div class="col-md-6">
+              <span class="f18 bold black">Information</span>
+              <div class="mt-4">
+                <div class="form-group">
+                  <label for="title" class="primaryFont f16 black">Titre *</label>
+                  <input type="title" class="form-control primaryFont f16" id="title"
+                    [ngClass]="{'is-invalid': submit&&f['name'].errors}" formControlName="name">
+                </div>
+                <div class="form-group">
+                  <label for="description" class="primaryFont f16 black">Description</label>
+                  <textarea class="form-control primaryFont f16" id="description" rows="5"
+                    [ngClass]="{'is-invalid': submit&&f['description'].errors}"
+                    formControlName="description"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="quantity" class="primaryFont f16 black">Quantité *</label>
+                  <input type="quantity" class="form-control primaryFont f16" id="quantity"
+                    [ngClass]="{'is-invalid': submit&&f['quantity'].errors}" formControlName="quantity">
+                </div>
+                <div class="form-group">
+                  <label for="Price" class="primaryFont f16 black">Prix *</label>
+                  <input type="Price" class="form-control primaryFont f16" id="Price"
+                    [ngClass]="{'is-invalid': submit&&f['price'].errors}" formControlName="price">
+                </div>
+                <div class="form-group">
+                  <label for="category" class="primaryFont f16 black_2">Catégorie *</label>
+                  <select class="form-control primaryFont f16 black_2" id="category"
+                    [ngClass]="{'is-invalid': submit&&f['category_id'].errors}" formControlName="category_id" >
+                    <option *ngFor="let catgeory of categories" class="primaryFont f16 black_2" [value]="catgeory.id">
+                      {{catgeory.title}}
+                    </option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <span class="f18 bold black">Information supplementaires</span>
+              <div class="form-group mt-4">
+                <label for="weight" class="primaryFont f16 black_2">Poids </label>
+                <input type="weight" class="form-control primaryFont f16" id="weight"
+                  [ngClass]="{'is-invalid': submit&&f['weight'].errors}" formControlName="weight">
+              </div>
+              <div class="form-group">
+                <label for="Dimensions" class="primaryFont f16 black_2">Dimensions </label>
+                <input type="Dimensions" class="form-control primaryFont f16" id="Dimensions"
+                  [ngClass]="{'is-invalid': submit&&f['dimensions'].errors}" formControlName="dimensions">
+              </div>
+              <div class="mt-3">
+                <span class=" primaryFont f16 black_2 ">Ajouter une video introductive</span>
+                <div class="d-flex align-items-end pt-2 p-2 photo_container">
+
+                  <div>
+                    <input type="file" id="actual-btnff" (change)="onFileSelected($event)"  />
+                    <!-- <label for="actual-btn" class="label_photo primaryFont f14 px-3">Télcharger</label> -->
+                  </div>
+                </div>
+              </div>
+              <div>
+                <span class=" primaryFont f16 black_2 ">Ajouter une photo</span>
+                <div class="d-flex align-items-end pt-2 p-2 photo_container">
+                  <div class="photo_product" [ngStyle]="{'background-image':imgUrl  ? 'url('+imgUrl+')' : '' }"></div>
+                  <div class="ml-3">
+                    <input type="file" id="actual-btn" (change)="showPreviewImage($event)" hidden />
+                    <label for="actual-btn" class="label_photo primaryFont f14 px-3">Upload</label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<ng-template #no_products>
+  <div class="container my-5">
+    <div class="d-flex justify-content-center align-items-center mt-5 flex-column">
+      <div class="py-5 empty_cart w-100 text-center">
+        <p class="grey primaryFont f14">Vous n'avez pas encore des produits appuyez sur le botton "Ajouter un produit"
+          pour insérer votre premier produit . </p>
+      </div>
+      <!-- <button class="btn primary_btn text-uppercase my-4 f14" [routerLink]="['/']"  >
+        Return to shop
+      </button> -->
+    </div>
+  </div>
+</ng-template>

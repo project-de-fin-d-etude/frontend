@@ -1,0 +1,62 @@
+<div class="grey_back d-flex align-items-center mt-6">
+  <div class="container">
+    <div class="f50 BoldItalic">
+      Mes commandes 
+    </div>
+    <div class="f18 Medium">
+      <!-- Where flowers are our inspiration -->
+      Ou les fleurs sont notre inspiration 
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <div *ngIf="orders?.length>0;else noOrders" class="table-responsive">
+    <table class="table table-borderless">
+      <thead class="text-uppercase primaryFont f14 black_2">
+        <tr>
+          <th>Date</th>
+          <th>L'addresse de livraison</th>
+          <th>Devis</th>
+          <th>Statut</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let order of orders">
+          <tr class="Medium f15 grey_2" [attr.aria-expanded]="!order.isCollapsed" aria-controls=order.id>
+            <td>{{order.date |date :"MMM d, y"}} </td>
+            <td>{{order.user.address}} </td>
+            <td> {{order.total_price.toLocaleString()}} DZ</td>
+            <td> Livré</td>
+            <td> <button type="button" class="btn arrow_btn" (click)="isCollapsed = !isCollapsed"
+                [attr.aria-expanded]="!isCollapsed" aria-controls="collapseBasic"
+                (click)="order.isCollapsed = !order.isCollapsed"><i class="arrow right"></i>
+              </button></td>
+          </tr>
+          <tr class="customTr">
+            <td colspan="4">
+              <div id="{{order.id}}" [collapse]="order.isCollapsed" class="collapse in p-3">
+                <div *ngFor="let item of order.items" class="d-flex align-items-center mb-2">
+                  <span class="primaryFont f15 grey">{{item.qnt}} </span>
+                  <img src="http://127.0.0.1:8000/uploads/products/{{item.image_name}}" alt="" class="mx-3 item_img">
+                  <span class="Medium f15 black">{{item.name}} </span>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
+<ng-template #noOrders>
+  <div class="container my-5">
+    <div class="d-flex justify-content-center align-items-center mt-5 flex-column">
+      <div class="py-5 empty_cart w-100 text-center">
+        <p class="grey primaryFont f14">Vous n'avez pas encore des commandes </p>
+      </div>
+      <button class="btn primary_btn text-uppercase my-4 f14" [routerLink]="['/']">
+        Retour 
+      </button>
+    </div>
+  </div>
+</ng-template>

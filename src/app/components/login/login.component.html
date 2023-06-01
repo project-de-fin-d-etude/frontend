@@ -1,0 +1,28 @@
+<div class="grey_back d-flex align-items-center mt-6">
+    <div class="container">
+        <div class="f50 BoldItalic">
+          Mon compte
+        </div>
+        <div class="f18 Medium">
+            où les fleurs sont notre source d'inspiration
+        </div>
+    </div>
+</div>
+<div class="container my-5">
+    <div class="row">
+        <div class="col-md-6">
+            <form [formGroup]="userForm">
+                <div class="form-group">
+                    <label for="email" class="primaryFont f16 black_2">Adresse e-mail *</label>
+                    <input type="email" class="form-control primaryFont f16" id="email" formControlName="email" [ngClass]="{'is-invalid':submit && f['email'].errors}">
+                </div>
+                <div class="form-group">
+                    <label for="password" class="primaryFont f16 black_2">Mot de passe * </label>
+                    <input type="password" class="form-control primaryFont f16" formControlName="password" id="password"[ngClass]="{'is-invalid':submit && f['password'].errors}">
+                </div>
+                <button type="submit" class="btn primary_btn text-uppercase my-4 f14" (click)="login()">connexion</button>
+            </form>
+            <p class="primaryFont f13 grey">Je n'ai pas de compte<span class="clickable create_new_account" [routerLink]="['/signup']" >Créer un nouveau compte </span></p>
+        </div>
+    </div>
+</div>

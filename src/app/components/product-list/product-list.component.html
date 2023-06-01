@@ -1,0 +1,123 @@
+<div class="grey_back d-flex align-items-center mt-6">
+    <div class="container">
+        <div class="f50 BoldItalic">
+            Product List
+        </div>
+        <div class="f18 Medium">
+            Where flowers are our inspiration
+        </div>
+    </div>
+</div>
+<div *ngIf="product" class="my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="mb-3" *ngFor="let image of product.images">
+                            <img class="w-100" src="http://127.0.0.1:8000/uploads/products/{{image}}" alt="">
+                        </div>
+                    </div>
+                    <div class="col-md-9 d-flex mb-3">
+                        <img class="w-100" src="http://127.0.0.1:8000/uploads/products/{{product.image_name}}" alt="" class="w-100">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex flex-column ml-md-3 ml-lg-5">
+                    <h2 class="Medium f38 black_2">{{product?.name}} </h2>
+                    <p class="price primaryFont pt-1"> {{product.price}} DZD</p>
+                    <p class="description Medium">
+                        {{product.description}}
+                    </p>
+                    <div class="d-flex align-items-center pb-4">
+                        <div class=" quantity px-4">
+                            <span class="f15 Medium grey mr-3">Quantity</span>
+                            <div class="d-flex align-items-center ">
+                                <button class="btn p-0" (click)="substract_quantity(product.id)">
+                                    <div class="arrow arrow-left p-0"></div>
+                                </button>
+                                <div class="primaryFont f18 grey qtt px-1">{{quantity}}</div>
+                                <button class="btn p-0"  (click)="add_quantity(product.id)">
+                                    <div class="arrow arrow-right"></div>
+                                </button>
+                            </div>
+                        </div>
+                        <button class="btn  add_to_cart_btn" (click)="add_to_cart()"> Add to cart</button>
+                    </div>
+                    <div class="d-flex flex-column">
+                        <div class="f15 primaryFont pb-2"><span class="black_2">ID: </span><span
+                                class="grey">{{product.id}}</span></div>
+                        <div class="f15 primaryFont pb-2"><span class="black_2">Category: </span><span
+                                class="grey">Exotic, Various</span></div>
+                        <div class="f15 primaryFont pb-2"><span class="black_2">Price: </span><span class="grey">{{product.price}}
+                                DZD</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="Medium  mt-4">
+            <tabset>
+                <tab heading="DESCRIPTION" id="tab1">
+                    <div class="mt-5">
+                        <h3 class="primaryFont black_2"> The power of flowers </h3>
+                        <p class="primaryFont f15 grey_2">
+                           {{product.description}}
+                        </p>
+                    </div>
+                </tab>
+                <tab heading="CONSEILS DE PLANTATION " id="tab1">
+                  <div class="mt-5">
+                      <video onclick="play(event)" src="http://127.0.0.1:8000/uploads/products/{{product.video_name}}" id="video"></video>
+                  </div>
+              </tab>
+                <tab heading="ADDITIONAL INFORMATION ">
+                    <div class="d-flex flex-column mt-5">
+                        <div class="f15 primaryFont pb-2"><span class="black_2">Weight: </span><span class="grey">{{product.weight}}
+                            </span></div>
+                        <div class="f15 primaryFont pb-2"><span class="black_2">Dimensions: </span><span class="grey">
+                          {{product.dimensions}}
+                        </span></div>
+                    </div>
+                </tab>
+                <tab heading="REVIEWS (2) ">
+                    <div class="mt-5">
+                        <h3 class="primaryFont black_2"> Reviews </h3>
+                        <div class="mt-4">
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="mr-2">
+                                    <img src="../../../assets/images/user-img-1-100x100.png" alt="" class="user_img">
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <div class="primaryFont pb-2"><span class="black f15">SELMA BENYOUSSEF</span><span
+                                            class="grey f12 ml-3">27.04.2018 </span></div>
+                                    <p class=" Medium grey_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                        Aenean commodo ligula
+                                        eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus.
+                                    </p>
+                                </div>
+
+                            </div>
+                            <div class="d-flex align-items-center mb-3">
+                                <div class="mr-2">
+                                    <img src="../../../assets/images/user-img-2-100x100.png" alt="" class="user_img">
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <div class="primaryFont pb-2"><span class="black f15">SELMA BENYOUSSEF</span><span
+                                            class="grey f12 ml-3">27.04.2018 </span></div>
+                                    <p class=" Medium grey_2">Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                                        Aenean commodo ligula
+                                        eget dolor. Aenean massa. Cum sociis Theme natoque penatibus et magnis dis
+                                        parturient montes, nascetur ridiculus mus.
+                                    </p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </div>
+</div>

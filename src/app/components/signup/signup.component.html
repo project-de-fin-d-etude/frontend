@@ -1,0 +1,61 @@
+<div class="grey_back d-flex align-items-center mt-6">
+  <div class="container">
+    <div class="f50 BoldItalic">
+      My Account
+    </div>
+    <div class="f18 Medium">
+      Where flowers are our inspiration
+    </div>
+  </div>
+</div>
+<div class="container my-5">
+  <form [formGroup]="userForm">
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="name" class="primaryFont f16 black_2">Name *</label>
+        <input type="text" class="form-control primaryFont f16" id="name" formControlName="name"
+          [ngClass]="{'is-invalid':submit && f['name'].errors}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="family_name" class="primaryFont f16 black_2">Family name * </label>
+        <input type="text" class="form-control primaryFont f16" formControlName="family_name" id="family_name"
+          [ngClass]="{'is-invalid':submit && f['family_name'].errors}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="email" class="primaryFont f16 black_2">Email address *</label>
+        <input type="email" class="form-control primaryFont f16" id="email" formControlName="email"
+          [ngClass]="{'is-invalid':submit && f['email'].errors}">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="phone_number" class="primaryFont f16 black_2">Phone Number * </label>
+        <input type="text" class="form-control primaryFont f16" formControlName="phone_number" id="phone_number"
+          [ngClass]="{'is-invalid':submit && f['phone_number'].errors}">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="type" class="primaryFont f16 black_2">Type du compte *</label>
+        <select class="form-control primaryFont f16 black_2" formControlName="type" id="type">
+          <option value="client">Client</option>
+          <option value="store_owner">Properitaire de boutique</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6">
+        <label for="password" class="primaryFont f16 black_2">Password * </label>
+        <input [disabled]="user" type="password" class="form-control primaryFont f16" formControlName="password"
+          id="password" [ngClass]="{'is-invalid':submit && f['password'].errors}">
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="address" class="primaryFont f16 black_2">Address *</label>
+      <input type="text" class="form-control primaryFont f16" id="address" formControlName="address"
+        [ngClass]="{'is-invalid':submit && f['address'].errors}">
+    </div>
+    <button type="submit" class="btn primary_btn text-uppercase my-4 f14"
+      (click)="signup()">{{user?"Modifier":"Signup"}}</button>
+    <p *ngIf="!user" class="primaryFont f13 grey">Already have an account <span class="clickable create_new_account"
+        [routerLink]="['/login']">login</span></p>
+  </form>
+</div>

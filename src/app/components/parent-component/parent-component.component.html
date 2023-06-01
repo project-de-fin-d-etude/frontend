@@ -1,0 +1,69 @@
+<header class="header_section mb-4">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg custom_nav-container ">
+            <a class="navbar-brand" href="#">
+                <span>
+                    Fiorello
+                </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <div class="d-flex mx-auto flex-column flex-lg-row align-items-center">
+                    <ul class="navbar-nav primaryFont f18 ">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#about"> About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#gallery"> Gallery </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#contact">Contact us</a>
+                        </li>
+                        <li class="nav-item" *ngIf="mYproducts">
+                          <a class="nav-link" href="owner_management">Mes Produits</a>
+                      </li>
+                    </ul>
+                </div>
+                <div class="quote_btn-container">
+                    <div class="btn-group" dropdown>
+                        <span *ngIf="is_logged_in;else profile" class="primaryFont f18 clickable dropdown-toggle"
+                            id="button-animated" dropdownToggle aria-controls="dropdown-animated" type="button">{{user?.name}} {{user?.family_name }} <span class="caret"></span></span>
+                        <!-- <button id="button-animated" dropdownToggle type="button" class="btn btn-primary dropdown-toggle"
+                                aria-controls="dropdown-animated">
+                          Button dropdown <span class="caret"></span> -->
+                        <!-- </button> -->
+                        <ul id="dropdown-animated " *dropdownMenu class="dropdown-menu" role="menu"
+                            aria-labelledby="button-animated">
+                            <li role="menuitem"><a class="dropdown-item primaryFont f15 black" [routerLink]="['/profile']" routerLinkActive="router-link-active" >Profile</a></li>
+                            <li role="menuitem"><a class="dropdown-item primaryFont f15 black" [routerLink]="['/my_orders']" routerLinkActive="router-link-active" >My orders</a>
+                            </li>
+                            <li role="menuitem"><a class="dropdown-item primaryFont f15 black" (click)="logout()" routerLinkActive="router-link-active" >Logout</a></li>
+                        </ul>
+                    </div>
+                    <a [routerLink]="['cart']" class="f18 primaryFont ml-4 d-flex ">
+                        <div class="position-relative">
+                            <img src="../../assets/images/svg/bag-handle-outline.svg" alt="">
+                            <span *ngIf="items_in_cart.length>0"
+                                class="badge primaryFont f12 black">{{items_in_cart.length}}</span>
+                        </div>
+                        <span class="ml-1">Cart (0 DZ)</span>
+                    </a>
+                    <ng-template #profile>
+                        <a [routerLink]="['/login']" routerLinkActive="router-link-active"  class="primaryFont f18">
+                            Log in
+                        </a>
+                    </ng-template>
+                </div>
+            </div>
+        </nav>
+    </div>
+</header>
+<router-outlet></router-outlet>
+<app-footer></app-footer>
